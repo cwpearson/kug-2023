@@ -1,0 +1,4 @@
+**/kokkos-*
+**/kernels-*
+**/*_run
+**/*_build
