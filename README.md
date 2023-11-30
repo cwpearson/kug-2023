@@ -7,5 +7,5 @@ Some examples of building and running Kokkos Kernels on Exascale-relevant Hardwa
 | `frontier` | AMD MI250x |
 | `blake-spr` | Intel Sapphire Rapids |
 | `blake-pvc` | Intel Ponte Vecchio |
-| `lumen` | Nvidia H100 |
+| `blake-h100` | Nvidia H100 |
 | `perlmutter` | Nvidia A100 |
