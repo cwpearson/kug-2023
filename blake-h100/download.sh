@@ -48,3 +48,5 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 
 ## Build Kernels
 cmake --build "$KERNELS_BUILD" -j "$(nproc)"
+
+srun -N 1 -p H100 "$KERNELS_BUILD"/perf_test/sparse/KokkosKernels_sparse_spmv_benchmark -f /projects/cwpears/sparc_gpu_problems/single_gpu/matrix.mm
