@@ -43,7 +43,8 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkosKernels_ENABLE_TPL_CUSPARSE=ON \
 -DKokkosKernels_ENABLE_TPL_CUBLASE=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
--DKokkosKernels_ENABLE_PERFTESTS=ON
+-DKokkosKernels_ENABLE_PERFTESTS=ON \
+-DKokkosKernels_ENABLE_BENCHMARK=ON
 
 ## Build Kernels
 cmake --build "$KERNELS_BUILD" -j "$(nproc)"

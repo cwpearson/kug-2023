@@ -30,7 +30,7 @@ cmake -S "$KOKKOS_SRC" -B "$KOKKOS_BUILD" \
 -DCMAKE_CXX_COMPILER=icpx \
 -DKokkos_ENABLE_SYCL=ON \
 -DKokkos_ARCH_NATIVE=ON \
--DKokkos_ARCH_INTEL_PVC=ON \
+-DKokkos_ARCH_INTEL_PVC=ON
 
 
 ## Build & Install Kokkos
@@ -44,6 +44,7 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkosKernels_ENABLE_TPL_MKL=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkosKernels_ENABLE_PERFTESTS=ON \
+-DKokkosKernels_ENABLE_BENCHMARK=ON \
 -DCMAKE_CXX_FLAGS="-fp-model=precise"
 
 ## Build Kernels
