@@ -39,7 +39,9 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkos_DIR="$KOKKOS_INSTALL/lib64/cmake/Kokkos" \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_CXX_COMPILER=icpx \
--DKokkosKernels_ENABLE_TPL_MKL=ON
+-DKokkosKernels_ENABLE_TPL_MKL=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_PERFTESTS=ON
 
 ## Build Kernels
 cmake --build "$KERNELS_BUILD" -j "$(nproc)"

@@ -38,6 +38,8 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DCMAKE_CXX_COMPILER=CC \
 -DKokkosKernels_ENABLE_TPL_ROCSPARSE=ON \
 -DKokkosKernels_ENABLE_TPL_ROCBLAS=ON \
+-DKokkosKernels_ENABLE_TESTS=ON \
+-DKokkosKernels_ENABLE_PERFTESTS=ON
 
 ## Build Kernels
 cmake --build "$KERNELS_BUILD" -j "$(nproc)"
