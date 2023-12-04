@@ -1,6 +1,4 @@
 #! /bin/bash
-#SBATCH -N 1
-#SBATCH -p all
 
 set -eou pipefail
 
@@ -11,6 +9,8 @@ export LOG_DIR
 mkdir -p "$LOG_DIR"
 
 
-srun -n1 -t 1 lscpu |& tee "$LOG_DIR/lscpu.log" || true
-srun -n1 -t 1 hostname |& tee "$LOG_DIR/hostname.log" || true
-srun -n1 -t 1 cat /proc/cpuinfo |& tee "$LOG_DIR/cpuinfo.log" || true
+srun -N 1 -p PV --exclude=blake15 -n1 -t 1 lscpu |& tee "$LOG_DIR/lscpu.log" || true
+srun -N 1 -p PV --exclude=blake15 -n1 -t 1 hostname |& tee "$LOG_DIR/hostname.log" || true
+srun -N 1 -p PV --exclude=blake15 -n1 -t 1 cat /proc/cpuinfo |& tee "$LOG_DIR/cpuinfo.log" || true
+
+srun -N 1 -p PV --exclude=blake15 -n1 -t 120 "$KERNELS_BUILD"/perf_test/sparse/KokkosKernels_sparse_spmv_benchmark -f /projects/cwpears/sparc_gpu_problems/single_gpu/matrix.mm

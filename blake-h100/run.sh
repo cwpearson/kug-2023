@@ -1,6 +1,6 @@
 #! /bin/bash
 #SBATCH -N 1
-#SBATCH -p all
+#SBATCH -p H100
 
 set -eou pipefail
 
@@ -14,3 +14,8 @@ mkdir -p "$LOG_DIR"
 srun -n1 -t 1 lscpu |& tee "$LOG_DIR/lscpu.log" || true
 srun -n1 -t 1 hostname |& tee "$LOG_DIR/hostname.log" || true
 srun -n1 -t 1 cat /proc/cpuinfo |& tee "$LOG_DIR/cpuinfo.log" || true
+
+
+srun -N 1 -p H100 "$KERNELS_BUILD"/perf_test/sparse/KokkosKernels_sparse_spmv_benchmark -f /projects/cwpears/sparc_gpu_problems/single_gpu/matrix.mm
+
+# srun -n1 -t 60 $ROOT/erf_test/blas/blas3/KokkosKernels_Blas3_gemm_benchmark

@@ -12,3 +12,4 @@ export KERNELS_BUILD="$ROOT_DIR/kernels-build-${KERNELS_SHA:0:8}"
 export MODULEPATH="$MODULEPATH:/projects/x86-64/modulefiles"
 module load intel/oneAPI/hpc-toolkit/2022.1.2
 module load cmake
+module load gcc/7.2.0
