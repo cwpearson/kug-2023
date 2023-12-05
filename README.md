@@ -8,4 +8,4 @@ Some examples of building and running Kokkos Kernels on Exascale-relevant Hardwa
 | `blake-spr` | Intel Sapphire Rapids |
 | `blake-pvc` | Intel Ponte Vecchio |
 | `blake-h100` | Nvidia H100 |
-| `perlmutter` | Nvidia A100 |
+| `perlmutter-a100` | Nvidia A100 |

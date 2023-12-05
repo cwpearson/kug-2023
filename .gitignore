@@ -2,3 +2,4 @@
 **/kernels-*
 **/*_run
 **/*_build
+**/matrix.mm
