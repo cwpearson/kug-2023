@@ -21,6 +21,7 @@ source "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"/env.sh
 module list |& tee "$LOG_DIR/module-list.log"
 lscpu |& tee "$LOG_DIR/lscpu.log"
 hostname |& tee "$LOG_DIR/hostname.log"
+env |& tee "$LOG_DIR/env.log"
 
 ## Configure Kokkos
 cmake -S "$KOKKOS_SRC" -B "$KOKKOS_BUILD" \
@@ -29,10 +30,10 @@ cmake -S "$KOKKOS_SRC" -B "$KOKKOS_BUILD" \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_CXX_COMPILER=icpx \
 -DKokkos_ENABLE_SYCL=ON \
--DKokkos_ARCH_NATIVE=ON \
+-DKokkos_ARCH_SPR=ON \
 -DKokkos_ARCH_INTEL_PVC=ON \
 -DKokkos_ENABLE_ONEDPL=OFF \
--DCMAKE_CXX_FLAGS="-fp-model=precise -fno-finite-math-only" \
+-DCMAKE_CXX_FLAGS="-fp-model=precise -fno-finite-math-only -mavx512f" \
 -DBUILD_SHARED_LIBS=ON
 
 ## Build & Install Kokkos
@@ -46,8 +47,11 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkosKernels_ENABLE_PERFTESTS=ON \
 -DKokkosKernels_ENABLE_BENCHMARK=ON \
--DCMAKE_CXX_FLAGS="-fp-model=precise" \
+-DCMAKE_CXX_FLAGS="-fp-model=precise -mavx512f" \
 -DBUILD_SHARED_LIBS=ON
 
 ## Build Kernels
-cmake --build "$KERNELS_BUILD" -j "$(nproc)"
+VERBOSE=1 make -C "$KERNELS_BUILD" -j "$(nproc)" \
+KokkosKernels_Blas3_gemm_benchmark \
+KokkosKernels_sparse_spmv_benchmark \
+|& tee "$LOG_DIR/kernels-build.log"

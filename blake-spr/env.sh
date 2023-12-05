@@ -9,7 +9,6 @@ export KERNELS_SHA=a80eb9114ddda2d9454e4f3cc8a3dd5143ecdfc8 # 2023 11 30
 export KERNELS_SRC="$ROOT_DIR/kernels-${KERNELS_SHA:0:8}"
 export KERNELS_BUILD="$ROOT_DIR/kernels-build-${KERNELS_SHA:0:8}"
 
-export MODULEPATH="$MODULEPATH:/projects/x86-64/modulefiles"
-module load intel/oneAPI/hpc-toolkit/2022.1.2
+source /projects/x86-64-icelake-rocky8/spack-config/blake-setup-user-module-env.sh
 module load cmake
-module load gcc/7.2.0
+module load intel-oneapi-compilers/2023.1.0 intel-oneapi-dpl/2022.1.0 intel-oneapi-mkl/2023.1.0
