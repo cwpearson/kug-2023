@@ -9,14 +9,10 @@ export LOG_DIR
 mkdir -p "$LOG_DIR"
 
 # intel blows up SSH for some reason?
-module del intel/oneAPI/hpc-toolkit/2022.1.2
 git clone git@github.com:kokkos/kokkos.git "$KOKKOS_SRC" || true
 (cd "$KOKKOS_SRC" && git checkout $KOKKOS_SHA) || true
 git clone git@github.com:kokkos/kokkos-kernels.git "$KERNELS_SRC" || true
 (cd "$KERNELS_SRC" && git checkout $KERNELS_SHA) || true
-
-# re-set up our environment
-source "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"/env.sh
 
 module list |& tee "$LOG_DIR/module-list.log"
 lscpu |& tee "$LOG_DIR/lscpu.log"
