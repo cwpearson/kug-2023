@@ -43,6 +43,9 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkosKernels_ENABLE_BENCHMARK=ON \
 -DKokkosKernels_ENABLE_TPL_ROCSPARSE=ON \
 -DKokkosKernels_ENABLE_TPL_ROCBLAS=ON \
+-DKokkosKernels_INST_OFFSET_INT=OFF \
+-DKokkosKernels_INST_OFFSET_INT64_T=ON \
+-DKokkosKernels_INST_OFFSET_SIZE_T=OFF \
 |& tee "$LOG_DIR/kernels-config.log"
 
 ## Build Kernels
