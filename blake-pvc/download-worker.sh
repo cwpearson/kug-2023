@@ -9,19 +9,31 @@ export LOG_DIR
 mkdir -p "$LOG_DIR"
 
 # intel blows up SSH for some reason?
-module del intel/oneAPI/hpc-toolkit/2022.1.2
+#module del intel/oneAPI/hpc-toolkit/2022.1.2
 git clone git@github.com:kokkos/kokkos.git "$KOKKOS_SRC" || true
 (cd "$KOKKOS_SRC" && git checkout $KOKKOS_SHA) || true
-git clone git@github.com:kokkos/kokkos-kernels.git "$KERNELS_SRC" || true
+git clone "$KERNELS_REMOTE" "$KERNELS_SRC" || true
 (cd "$KERNELS_SRC" && git checkout $KERNELS_SHA) || true
+git clone "$PTI_REMOTE" "$PTI_SRC" || true
+(cd "$PTI_SRC" && git checkout $PTI_SHA) || true
 
 # re-set up our environment
-source "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"/env.sh
+#source "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"/env.sh
 
 module list |& tee "$LOG_DIR/module-list.log"
 lscpu |& tee "$LOG_DIR/lscpu.log"
 hostname |& tee "$LOG_DIR/hostname.log"
-env |& tee "$LOG_DIR/env.log"
+env 2>&1 >> "$LOG_DIR/env.log"
+
+## Configure onetrace
+cmake -S "$PTI_SRC/tools/onetrace" -B "$PTI_BUILD" \
+-DCMAKE_BUILD_TYPE=Release \
+-DCMAKE_CXX_COMPILER=icpx \
+|& tee "$LOG_DIR"/onetrace-config.log
+
+## build onetrace
+make -C "$PTI_BUILD" \
+|& tee "$LOG_DIR/onetrace-build.log"
 
 ## Configure Kokkos
 cmake -S "$KOKKOS_SRC" -B "$KOKKOS_BUILD" \
@@ -44,6 +56,7 @@ cmake -S "$KERNELS_SRC" -B "$KERNELS_BUILD" \
 -DKokkos_DIR="$KOKKOS_INSTALL/lib64/cmake/Kokkos" \
 -DCMAKE_BUILD_TYPE=Release \
 -DCMAKE_CXX_COMPILER=icpx \
+-DKokkosKernels_ENABLE_TPL_MKL=ON \
 -DKokkosKernels_ENABLE_TESTS=ON \
 -DKokkosKernels_ENABLE_PERFTESTS=ON \
 -DKokkosKernels_ENABLE_BENCHMARK=ON \

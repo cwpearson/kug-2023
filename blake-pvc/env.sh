@@ -5,9 +5,15 @@ export KOKKOS_SRC="$ROOT_DIR/kokkos-${KOKKOS_SHA:0:8}"
 export KOKKOS_BUILD="$ROOT_DIR/kokkos-build-${KOKKOS_SHA:0:8}"
 export KOKKOS_INSTALL="$ROOT_DIR/kokkos-install-${KOKKOS_SHA:0:8}"
 
-export KERNELS_SHA="4ce619e161efd731b87df4160821328cff17a4ee" # 2023 12 06
+export KERNELS_REMOTE="git@github.com:cwpearson/kokkos-kernels.git"
+export KERNELS_SHA=a91a1f24560692d6a294e764f82f497dc10aeb7d # 2023 12 08
 export KERNELS_SRC="$ROOT_DIR/kernels-${KERNELS_SHA:0:8}"
 export KERNELS_BUILD="$ROOT_DIR/kernels-build-${KERNELS_SHA:0:8}"
+
+export PTI_REMOTE="git@github.com:intel/pti-gpu.git"
+export PTI_SHA="f27829883defd69c18e7dc2e4cdd727a2483c40c" # 2023 12 11
+export PTI_SRC="$ROOT_DIR/pti-gpu-${PTI_SHA:0:8}"
+export PTI_BUILD="$ROOT_DIR/pti-gpu-build-${PTI_SHA:0:8}"
 
 source /projects/x86-64-icelake-rocky8/spack-config/blake-setup-user-module-env.sh
 module load cmake
