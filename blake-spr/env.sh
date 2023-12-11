@@ -5,7 +5,8 @@ export KOKKOS_SRC="$ROOT_DIR/kokkos-${KOKKOS_SHA:0:8}"
 export KOKKOS_BUILD="$ROOT_DIR/kokkos-build-${KOKKOS_SHA:0:8}"
 export KOKKOS_INSTALL="$ROOT_DIR/kokkos-install-${KOKKOS_SHA:0:8}"
 
-export KERNELS_SHA=a80eb9114ddda2d9454e4f3cc8a3dd5143ecdfc8 # 2023 11 30
+export KERNELS_REMOTE="git@github.com:cwpearson/kokkos-kernels.git"
+export KERNELS_SHA=a91a1f24560692d6a294e764f82f497dc10aeb7d # 2023 12 08
 export KERNELS_SRC="$ROOT_DIR/kernels-${KERNELS_SHA:0:8}"
 export KERNELS_BUILD="$ROOT_DIR/kernels-build-${KERNELS_SHA:0:8}"
 

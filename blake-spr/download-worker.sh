@@ -12,7 +12,7 @@ mkdir -p "$LOG_DIR"
 # module del intel/oneAPI/hpc-toolkit/2022.1.2
 git clone git@github.com:kokkos/kokkos.git "$KOKKOS_SRC" || true
 (cd "$KOKKOS_SRC" && git checkout $KOKKOS_SHA) || true
-git clone git@github.com:kokkos/kokkos-kernels.git "$KERNELS_SRC" || true
+git clone "$KOKKOS_REMOTE" "$KERNELS_SRC" || true
 (cd "$KERNELS_SRC" && git checkout $KERNELS_SHA) || true
 
 # re-set up our environment
