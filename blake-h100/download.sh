@@ -11,7 +11,7 @@ mkdir -p "$LOG_DIR"
 # intel blows up SSH for some reason?
 git clone git@github.com:kokkos/kokkos.git "$KOKKOS_SRC" || true
 (cd "$KOKKOS_SRC" && git checkout $KOKKOS_SHA) || true
-git clone git@github.com:kokkos/kokkos-kernels.git "$KERNELS_SRC" || true
+git clone "$KERNELS_REMOTE" "$KERNELS_SRC" || true
 (cd "$KERNELS_SRC" && git checkout $KERNELS_SHA) || true
 
 module list |& tee "$LOG_DIR/module-list.log"
